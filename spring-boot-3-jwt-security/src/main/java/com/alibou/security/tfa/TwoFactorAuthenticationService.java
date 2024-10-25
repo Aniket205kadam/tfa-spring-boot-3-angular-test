@@ -49,7 +49,7 @@ public class TwoFactorAuthenticationService {
 
     public boolean isOtpValid(String secret, String code) {
         TimeProvider timeProvider = new SystemTimeProvider();
-        CodeGenerator codeGenerator = new DefaultCodeGenerator();
+        CodeGenerator codeGenerator = new DefaultCodeGenerator(HashingAlgorithm.SHA1, 6);
         CodeVerifier verifier = new DefaultCodeVerifier(codeGenerator, timeProvider);
         return verifier.isValidCode(secret, code);
     }
